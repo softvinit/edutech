@@ -33,11 +33,11 @@ class PermissionSeeder extends Seeder
             'categories.category_level_2.delete',
             'content',
         ];
-         // Looping and Inserting Array's Permissions into Permission Table
-         foreach ($permissions as $permission) {
+        // Looping and Inserting Array's Permissions into Permission Table
+        foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
-          }
-           // Check if "admin",'superadmin' role exists
+        }
+        // Check if "admin",'superadmin' role exists
         $role_admin = Role::firstOrCreate(['name' => 'admin']);
         $role_superadmin = Role::firstOrCreate(['name' => 'superadmin']);
         // Assign all permissions to the "admin",'superadmin' role if not already assigned
@@ -45,12 +45,12 @@ class PermissionSeeder extends Seeder
         $role_superadmin->syncPermissions(Permission::all());
         // Assign the "admin" role to all users who have this role
         $adminUsers = User::role('admin')->get();
-        $superadminUsers = User::role('superadmin')->get();
+        // $superadminUsers = User::role('superadmin')->get();
         foreach ($adminUsers as $user1) {
             $user1->syncPermissions(Permission::all());
         }
-        foreach ($superadminUsers as $user2) {
-            $user2->syncPermissions(Permission::all());
-        }
+        // foreach ($superadminUsers as $user2) {
+        //     $user2->syncPermissions(Permission::all());
+        // }
     }
 }

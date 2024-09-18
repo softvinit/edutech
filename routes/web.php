@@ -25,46 +25,47 @@ use App\Http\Controllers\UploadMonitorController;
 Route::get('/login', function () {
     return view('auth.login');
 });
+Route::post('login', [LoginController::class, 'login'])->name('login');
+
 // Route::get('login', function () {
 //     return view('dashboard');
 // });
 
-Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 
 Route::middleware(['auth'])->group(function () {
 
     Route::get('ins/content', [LiveClassController::class, 'index'])->name('liveclass');
-Route::post('ins/content', [LiveClassController::class, 'store'])->name('liveclass.store');
-Route::get('/live-classes/{id}', [LiveClassController::class, 'show'])->name('liveClasses.show');
-Route::get('/live-classes/data', [LiveClassController::class, 'getData'])->name('liveClasses.data');
-// Route for editing a live class
-Route::get('/live-Class/{id}/edit', [LiveClassController::class, 'edit'])->name('liveClasses.edit');
+    Route::post('ins/content', [LiveClassController::class, 'store'])->name('liveclass.store');
+    Route::get('/live-classes/{id}', [LiveClassController::class, 'show'])->name('liveClasses.show');
+    Route::get('/live-classes/data', [LiveClassController::class, 'getData'])->name('liveClasses.data');
+    // Route for editing a live class
+    Route::get('/live-Class/{id}/edit', [LiveClassController::class, 'edit'])->name('liveClasses.edit');
 
-// Route for updating a live class (this will handle the form submission)
-Route::put('/live-Classes/{id}', [LiveClassController::class, 'update'])->name('liveclass.update');
+    // Route for updating a live class (this will handle the form submission)
+    Route::put('/live-Classes/{id}', [LiveClassController::class, 'update'])->name('liveclass.update');
 
-// Route for deleting a live class
-Route::delete('/live-Classes/{id}', [LiveClassController::class, 'destroy'])->name('liveClasses.destroy');
-Route::get('/live-classes/clear-session', [LiveClassController::class, 'resetSession'])->name('liveclass.reset');
+    // Route for deleting a live class
+    Route::delete('/live-Classes/{id}', [LiveClassController::class, 'destroy'])->name('liveClasses.destroy');
+    Route::get('/live-classes/clear-session', [LiveClassController::class, 'resetSession'])->name('liveclass.reset');
 
-// In get Category route , fetching category 1 and category 2
-Route::get('/live-classes/cat1/{categoryId}', [LiveClassController::class, 'getCategoryOptions'])->name('liveclass.getCategoryOptions');
-Route::get('/live-classes/cat2/{categoryId}', [LiveClassController::class, 'getCategory_2Options'])->name('liveclass.getCategory_2Options');
+    // In get Category route , fetching category 1 and category 2
+    Route::get('/live-classes/cat1/{categoryId}', [LiveClassController::class, 'getCategoryOptions'])->name('liveclass.getCategoryOptions');
+    Route::get('/live-classes/cat2/{categoryId}', [LiveClassController::class, 'getCategory_2Options'])->name('liveclass.getCategory_2Options');
 
-Route::get('ins/video', [VideoCourseController::class, 'index'])->name('videocourse');
-Route::post('ins/video', [VideoCourseController::class, 'store'])->name('videocourse.store');
-Route::get('ins/video/edit/{id}', [VideoCourseController::class, 'edit'])->name('videocourse.edit');
-// Route for the update method in VideoCourseController
-Route::put('/videocourses/{id}', [VideoCourseController::class, 'update'])->name('videocourse.update');
-Route::get('/videocourses/{id}/videos', [VideoCourseController::class, 'showVideos'])->name('videocourse.showVideos');
-Route::delete('/videos/{id}', [VideoCourseController::class, 'destroy'])->name('videocourse.deleteVideo');
-Route::post('ins/video/upload', [VideoCourseController::class, 'uploadVideos'])->name('videocourse.uploadVideos');
-Route::delete('/ins/video/delete_multiple', [VideoCourseController::class, 'deleteMultiple'])->name('videocourse.deleteMultiple');
+    Route::get('ins/video', [VideoCourseController::class, 'index'])->name('videocourse');
+    Route::post('ins/video', [VideoCourseController::class, 'store'])->name('videocourse.store');
+    Route::get('ins/video/edit/{id}', [VideoCourseController::class, 'edit'])->name('videocourse.edit');
+    // Route for the update method in VideoCourseController
+    Route::put('/videocourses/{id}', [VideoCourseController::class, 'update'])->name('videocourse.update');
+    Route::get('/videocourses/{id}/videos', [VideoCourseController::class, 'showVideos'])->name('videocourse.showVideos');
+    Route::delete('/videos/{id}', [VideoCourseController::class, 'destroy'])->name('videocourse.deleteVideo');
+    Route::post('ins/video/upload', [VideoCourseController::class, 'uploadVideos'])->name('videocourse.uploadVideos');
+    Route::delete('/ins/video/delete_multiple', [VideoCourseController::class, 'deleteMultiple'])->name('videocourse.deleteMultiple');
 
-Route::get('ins/login', [LoginController::class, 'insindex'])->name('inslogin');
+    Route::get('ins/login', [LoginController::class, 'insindex'])->name('inslogin');
 
-Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('ins/dashboard', [InstituteController::class, 'index'])->name('insdashboard');
     /***  For Course routes ***/
